@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Lingala Manisha</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <style>
+    body {
+      background-color: #8B4513; /* Brown background */
+      color: white;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      width: 50%;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    h1 {
+      color: white;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+    
+    button {
+      background-color: #FFD700; /* Gold */
+      color: black;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #DAA520; /* Darker Gold */
+    }
+    
+    .contact-info {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .contact-info a {
+      color: #FFD700;
+      text-decoration: none;
+    }
+    
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Contact Me</h1>
+    
+    <form action="https://formspree.io/f/xvgkqovz" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="contact-info">
+      <p>Email: <a href="mailto:manishalingala2002@gmail.com">manishalingala2002@gmail.com</a></p>
+      <p>Phone: <a href="tel:+821097284085">+82 01097284085</a></p>
+      <p>GitHub: <a href="https://github.com/manishalingala" target="_blank">github.com/manishalingala</a></p>
+      <p><a href="index.html">← Back to Home</a></p>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
