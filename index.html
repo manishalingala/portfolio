@@ -373,9 +373,79 @@
             text-decoration: underline;
         }
 
+        /* Achievements Section */
+#achievements {
+    background-color: #f0f0e6;
+    padding: 60px 0;
+}
+
+.achievement-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.achievement {
+    background-color: #6b7848;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.achievement-text h3 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.achievement-text p {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+}
+
+.achievement-images {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.achievement-images img {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.achievement-images img:hover {
+    transform: scale(1.03);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .achievement-images {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .achievement-images img {
+        max-width: 90%;
+    }
+}
+
+        /* Resume Section*/
+        #resume {
+            background-color: #F9F3EF /* Achievements Section */
+        }
+        
         /* Contact Section */
         #contact {
-            background-color:#fafaf7;
+            background-color: #F8F8F8;
         }
 
         .contact-content {
@@ -515,6 +585,7 @@
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#publications">Publications</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
                     <li><a href="#resume">Resume</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -594,7 +665,7 @@
         <div class="experience-timeline">
 
             <div class="timeline-item">
-                <h3>Research Consultant (Part-Time)</h3>
+                <h3>Researcher Consultant (Part-Time)</h3>
                 <h4>AI Robotics | Apr 2025 – Present</h4>
                 <ul>
                     <li>Developing a transformer-based computer vision model to detect welding defects in automotive components such as air fillers, cuts, and insufficient weld thickness.</li>
@@ -740,6 +811,40 @@
       </div>
   </div>
 </section>
+<!-- Achievements Section -->
+<!-- Achievements Section -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-title">
+      <h2>Achievements</h2>
+    </div>
+
+    <div class="achievement-card">
+      <div class="achievement-text">
+        <h3>Best Thesis Award – KNU-EERC</h3>
+        <p>Received the best thesis award at the KNU-EERC event – July 2025</p>
+      </div>
+      <div class="achievement-images">
+        <img src="assets/images/pic9.jpeg" alt="Thesis Award" />
+        <img src="assets/images/pic10.png" alt="Lingala Manisha with Award" />
+      </div>
+    </div>
+
+    <div class="achievement-card">
+      <div class="achievement-text">
+        <h3>NodyCon Oral Presentation – DLDMP</h3>
+        <p>Delivered an oral presentation on DLDMP at NodyCon, New York, USA – June 2025</p>
+      </div>
+      <div class="achievement-images">
+    <img src="assets/images/pic11.png" alt="Lingala Manisha with Award" />
+    <img src="assets/images/pic12.png" alt="Lingala Manisha with Award" />
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- Resume Section -->
 <section id="resume">
     <div class="container">
