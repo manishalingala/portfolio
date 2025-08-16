@@ -2,605 +2,1245 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lingala Manisha - Portfolio</title>
     <style>
-        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        /* Global Reset & Variables */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
+            --text-dark: #1a1a1a;
+            --text-light: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-accent: #f1f5f9;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --border-radius: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--bg-primary);
+            overflow-x: hidden;
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
 
-        section {
-            padding: 60px 0;
-        }
-
-        h1, h2, h3 {
-            color: #222;
-            margin-bottom: 15px;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        /* Navigation */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        /* Modern Navigation */
+        .navbar {
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
             z-index: 1000;
+            transition: var(--transition);
         }
 
-        nav {
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 1rem 2rem;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            text-decoration: none;
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .nav-links {
+        .nav-menu {
             display: flex;
             list-style: none;
+            gap: 2.5rem;
+            align-items: center;
         }
 
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
+        .nav-menu a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-dark);
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: #546d88;
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .menu-toggle {
             display: none;
+            flex-direction: column;
             cursor: pointer;
-            font-size: 24px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 3px;
         }
 
         /* Hero Section */
-        #hero {
-            height: 100vh;
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #a9b09a 90%, #c6c0b1 10%);
-            margin-top: 80px;
+            position: relative;
+            background: linear-gradient(135deg, #5e6790 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,1000 1000,0 1000,1000"/></svg>');
         }
 
         .hero-content {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+            padding: 2rem 0;
         }
 
         .hero-text {
-            flex: 1;
-            padding-right: 30px;
+            color: white;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero-text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #222;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero-text h2 {
-            font-size: 24px;
-            color: #555;
-            margin-bottom: 30px;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            opacity: 0.9;
         }
 
-        .hero-text p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            color: #666;
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
         }
 
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Section Titles */
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            display: inline-block;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #007bff;
-        }
-
-        /* About Section */
-        #about {
-            background-color: #e0e3d4;
-        }
-
-        .about-content {
+        .hero-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 30px;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        /* Education Section */
-        #education {
-            background-color:#e8e8dc ;
-        }
-
-        .education-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .education-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .education-card h3 {
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-
-        .education-card h4 {
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .education-card p {
-            color: #666;
-        }
-
-        /* Experience Section */
-        #experience {
-            background-color: #efefe5;
-        }
-
-        .experience-timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline-item {
-            padding: 30px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .timeline-item h3 {
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-
-        .timeline-item h4 {
-            font-weight: 500;
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .timeline-item ul {
-            list-style-position: inside;
-            margin-left: 20px;
-        }
-
-        /* Projects Section */
-        #projects {
-            background-color: #e3e4d7;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-        .project-card:hover {
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease-out 0.3s both;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            z-index: 2;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
         }
 
-        .project-card h3 {
-            color: #007bff;
-            margin-bottom: 15px;
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
-        .project-card p {
-            margin-bottom: 20px;
+        .stat-label {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Education & Experience */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-gradient);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -15px;
+            border: 15px solid transparent;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -15px;
+            border: 15px solid transparent;
+            border-right-color: white;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        .timeline-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .timeline-subtitle {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
         }
 
         .project-image {
             width: 100%;
-            height: 200px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: var(--transition);
         }
 
-        .project-image:hover {
-            transform: scale(1.03);
+        .project-card:hover .project-image {
+            transform: scale(1.1);
         }
 
-        .video-btn {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            background: var(--bg-accent);
+            color: var(--text-dark);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 500;
-            margin-top: 10px;
-            transition: background-color 0.3s ease;
         }
 
-        .video-btn:hover {
-            background-color: #0056b3;
-        }
-
+        /* Enhanced Video Overlay */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1001;
+            z-index: 2001;
+            backdrop-filter: blur(10px);
         }
 
         .video-container {
-            width: 80%;
-            max-width: 1000px;
+            width: 90%;
+            max-width: 1200px;
             position: relative;
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 20px;
         }
 
         .close-video {
             position: absolute;
-            top: -40px;
-            right: 0;
+            top: -15px;
+            right: 15px;
+            color: var(--text-dark);
+            font-size: 2rem;
+            cursor: pointer;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .close-video:hover {
+            background: var(--bg-secondary);
+            transform: scale(1.1);
+        }
+
+        .video-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            flex-wrap: wrap;
+        }
+
+        .video-control-btn {
+            background: var(--primary-gradient);
             color: white;
-            font-size: 30px;
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            min-width: 60px;
+        }
+
+        .video-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+        }
+        .video-wrapper iframe {
+           position: absolute;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           border-radius: 10px;
+        }
+        .speed-display {
+           background: var(--success-gradient);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .project-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-abstract {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid transparent;
+            border-image: var(--primary-gradient) 1;
+        }
+
+        .project-abstract h4 {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+          
+
+        /* Gallery Section */
+        
+        .gallery-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-tab {
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid var(--border-light);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .gallery-tab.active,
+        .gallery-tab:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
             cursor: pointer;
         }
 
-        /* Publications Section */
-        #publications {
-            background-color:#f5f5f0;
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
         }
 
+        .gallery-item img {
+           width: 100%;
+           height: auto; /* let image keep its natural aspect ratio */
+           max-height: 400px; /* optional: to keep tall images from being huge */
+           object-fit: contain; /* shows full image without cropping */
+           transition: var(--transition);
+           background-color: #f9f9f9; /* optional: fill background for smaller images */
+}
+
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-info {
+            padding: 1.5rem;
+        }
+
+        .gallery-item-info h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Publications */
         .publications-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
         }
 
         .publication-card {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-left: 5px solid transparent;
+            border-image: var(--primary-gradient) 1;
         }
 
         .publication-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .publication-card h3 {
-            color: #007bff;
-            margin-bottom: 15px;
+        .publication-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .publication-card p {
-            margin-bottom: 20px;
+        .publication-meta {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .publication-link {
-            display: inline-block;
-            color: #007bff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-gradient);
+            color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: var(--transition);
         }
 
         .publication-link:hover {
-            color: #0056b3;
-            text-decoration: underline;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
-        /* Achievements Section */
-#achievements {
-    background-color: #f0f0e6;
-    padding: 60px 0;
-}
-
-.achievement-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-}
-
-.achievement {
-    background-color: #6b7848;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.achievement-text h3 {
-    font-size: 24px;
-    color: #007bff;
-    margin-bottom: 10px;
-}
-
-.achievement-text p {
-    font-size: 16px;
-    color: #444;
-    line-height: 1.6;
-}
-
-.achievement-images {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.achievement-images img {
-    max-width: 300px;
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease;
-}
-
-.achievement-images img:hover {
-    transform: scale(1.03);
-}
-
-/* Responsive */
-@media screen and (max-width: 768px) {
-    .achievement-images {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .achievement-images img {
-        max-width: 90%;
-    }
-}
-
-        /* Resume Section*/
-        #resume {
-            background-color: #F9F3EF /* Achievements Section */
-        }
-        
-        /* Contact Section */
-        #contact {
-            background-color: #F8F8F8;
+        /* Achievements */
+        .achievements-grid {
+            display: grid;
+            gap: 3rem;
         }
 
-        .contact-content {
+        .achievement-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .achievement-text h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .achievement-images {
             display: flex;
+            gap: 1rem;
             flex-wrap: wrap;
-            gap: 30px;
-            justify-content: space-between;
+        }
+
+        .achievement-images img {
+          max-width: 200px;         /* Limit width but keep aspect ratio */
+          height: auto;             /* Let height adjust naturally */
+          object-fit: contain;      /* Show full image without cropping */
+          border-radius: 15px;
+          box-shadow: var(--shadow-sm);
+          transition: var(--transition);
+          background-color: #f8f8f8; /* Optional: fill empty space with neutral color */
+          padding: 5px;              /* Optional: padding for images with transparent edges */
+        }
+
+
+        .achievement-images img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
         .contact-info {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .contact-info h3 {
-            color: #007bff;
-            margin-bottom: 20px;
+            space-y: 2rem;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-md);
         }
 
         .contact-item i {
-            margin-right: 10px;
-            color: #007bff;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
         }
 
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
         .social-links a {
+            width: 60px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: #007bff;
-            color: #fff;
+            background: var(--primary-gradient);
+            color: white;
             border-radius: 50%;
+            font-size: 1.5rem;
+            transition: var(--transition);
             text-decoration: none;
-            transition: background-color 0.3s ease;
         }
 
         .social-links a:hover {
-            background-color: #0056b3;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-form-button .btn {
+            width: 100%;
+            text-align: center;
+            background: var(--accent-gradient);
+            color: white;
+            margin-top: 2rem;
+        }
+
+        /* Resume Section */
+        .resume-content {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .resume-content img {
+            max-width: 300px;
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            margin: 1rem;
+        }
+
+        .resume-content img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
         }
 
         /* Footer */
-        footer {
-            background-color: #222;
-            color: #fff;
-            padding: 30px 0;
+        .footer {
+            background: var(--dark-gradient);
+            color: white;
+            padding: 3rem 0;
             text-align: center;
         }
 
+        .footer p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
         /* Responsive Design */
-        @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: block;
+        @media (max-width: 1024px) {
+            .hero-content,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
-            .nav-links {
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 3rem !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-item .timeline-dot {
+                left: -10px !important;
+            }
+
+            .timeline-item .timeline-content::before {
+                left: -15px !important;
+                border: 15px solid transparent !important;
+                border-right-color: white !important;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
                 position: fixed;
-                top: 80px;
-                right: -100%;
-                width: 70%;
+                top: 100%;
+                left: 0;
+                width: 100%;
                 height: 100vh;
-                background-color: #fff;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
                 flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                padding-top: 50px;
-                transition: right 0.3s ease;
-                box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+                justify-content: center;
+                transform: translateY(-100vh);
+                transition: var(--transition);
             }
 
-            .nav-links.active {
-                right: 0;
+            .nav-menu.active {
+                transform: translateY(0);
             }
 
-            .nav-links li {
-                margin: 15px 0;
+            .menu-toggle {
+                display: flex;
             }
 
             .hero-content {
-                flex-direction: column;
                 text-align: center;
             }
 
-            .hero-text {
-                padding-right: 0;
-                margin-bottom: 30px;
+            .hero-buttons {
+                justify-content: center;
             }
 
-            .education-grid,
-            .publications-grid,
-            .projects-grid {
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
 
             .video-container {
                 width: 95%;
+                padding: 1rem;
+            }
+
+            .project-info {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .achievement-images {
+                justify-content: center;
+            }
+
+            .gallery-tabs {
+                gap: 0.5rem;
+            }
+
+            .gallery-tab {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
             }
         }
 
-        @media screen and (max-width: 480px) {
+        @media (max-width: 480px) {
             .hero-text h1 {
-                font-size: 36px;
+                font-size: 2rem;
             }
 
-            .hero-text h2 {
-                font-size: 20px;
+            .hero-subtitle {
+                font-size: 1.2rem;
             }
 
-            .section-title h2 {
-                font-size: 28px;
+            .section-header h2 {
+                font-size: 1.8rem;
             }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .gallery-grid,
+            .projects-grid,
+            .publications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease-out;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Loading animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-gradient);
         }
     </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Lingala Manisha</a>
-                <div class="menu-toggle">☰</div>
-                <ul class="nav-links">
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#achievements">Achievements</a></li>
-                    <li><a href="#resume">Resume</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Lingala Manisha</div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
     <!-- Hero Section -->
-    <section id="hero">
+    <section class="hero">
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Hello, I am Lingala Manisha!</h1>
-                    <h2>Master's Student in Electronics and Electrical Engineering</h2>
-                    <p>A passionate explorer in the world of robotics, artificial intelligence, and intelligent systems.</p>
+                    <h1>Hello, I'm Lingala Manisha!</h1>
+                    <div class="hero-subtitle">Master's Student in Electronics and Electrical Engineering</div>
+                    <p class="hero-description">A passionate explorer in the world of robotics, artificial intelligence, and intelligent systems, crafting the future through innovative technology.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View My Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
                 </div>
                 <div class="hero-image">
                     <img src="assets/images/manisha.jpeg" alt="Lingala Manisha">
@@ -610,387 +1250,973 @@
     </section>
 
     <!-- About Section -->
-    <section id="about">
+    <section id="about" class="section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-header fade-in">
                 <h2>About Me</h2>
+                <p>Discover my journey in robotics and AI</p>
             </div>
             <div class="about-content">
-                <p>I'm currently pursuing my Master's in Electronics and Electrical Engineering at Kyungpook National University, where I'm part of the Physical Intelligence Lab. My work lies at the intersection of control systems, robotic manipulation, and machine learning. Simply put, I teach robots how to move, learn, and think.</p>
-                <p>From programming drones to follow dynamic trajectories, to training robotic arms to pick up delicate objects, I've always been fascinated by the beautiful blend of logic and creativity that defines engineering.</p>
-                <p>But beyond the code and circuits, I'm a thinker, a learner, and a storyteller. I believe every robot I build is a story — of innovation, failure, resilience, and breakthrough.</p>
+                <div class="about-text slide-in-left">
+                    <p>I'm currently pursuing my Master's in Electronics and Electrical Engineering at Kyungpook National University, where I am part of the Physical Intelligence Lab. My work lies at the intersection of control systems, robotic manipulation, and machine learning.</p>
+                    <p>From programming drones to follow dynamic trajectories, to training robotic arms to pick up delicate objects, I've always been fascinated by the beautiful blend of logic and creativity that defines engineering.</p>
+                    <p>Beyond the code and circuits, I am a thinker, a learner and a storyteller. I believe every robot I build is a story — of innovation, failure, resilience and breakthrough.</p>
+                </div>
+                <div class="stats-grid slide-in-right">
+                    <div class="stat-card">
+                        <span class="stat-number">15+</span>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">4.22</span>
+                        <div class="stat-label">Current GPA</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">3+</span>
+                        <div class="stat-label">Years Research</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">5+</span>
+                        <div class="stat-label">Publications</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Education Section -->
-    <section id="education">
+    <section id="education" class="section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-header fade-in">
                 <h2>Education</h2>
+                <p>My academic journey in engineering and technology</p>
             </div>
-            <div class="education-grid">
-                <div class="education-card">
-                    <h3>Kyungpook National University</h3>
-                    <h4>Master's in Electronics and Electrical Engineering</h4>
-                    <p>2024 - present</p>
-                    <p>Current GPA: 4.22/4.3</p>
-                    <p>Key Focus: Robotics, AI, and Diffusion Models</p>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 - Present</div>
+                        <div class="timeline-title">Master's in Electronics and Electrical Engineering</div>
+                        <div class="timeline-subtitle">Kyungpook National University</div>
+                        <div class="timeline-description">Current GPA: 4.22/4.3 • Focus: Robotics, AI, and Diffusion Models • Physical Intelligence Lab Member</div>
+                    </div>
                 </div>
-                
-                <div class="education-card">
-                    <h3>Kyungpook National University</h3>
-                    <h4>Bachelor's in School of Electronics Engineering (Double degree)</h4>
-                    <p>2022-2024</p>
-                    <p>GPA: 3.96/4.3</p>
-                    <p>Key Focus: Advanced Robotics and AI Systems</p>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022 - 2024</div>
+                        <div class="timeline-title">Bachelor's in Electronics Engineering (Double Degree)</div>
+                        <div class="timeline-subtitle">Kyungpook National University</div>
+                        <div class="timeline-description">GPA: 3.96/4.3 • Focus: Advanced Robotics and AI Systems • International Exchange Program</div>
+                    </div>
                 </div>
-                <div class="education-card">
-                    <h3>Christ University</h3>
-                    <h4>Bachelor's in Electronics and Communication Engineering</h4>
-                    <p>2019-2024</p>
-                    <p>GPA: 3.94/4</p>
-                    <p>Key Focus: Robotics and Signal Processing</p>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019 - 2024</div>
+                        <div class="timeline-title">Bachelor's in Electronics and Communication Engineering</div>
+                        <div class="timeline-subtitle">Christ University</div>
+                        <div class="timeline-description">GPA: 3.94/4 • Focus: Robotics and Signal Processing • Foundation in Engineering Principles</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-<section id="experience">
-    <div class="container">
-        <div class="section-title">
-            <h2>Experience</h2>
-        </div>
-        <div class="experience-timeline">
-
-            <div class="timeline-item">
-                <h3>Robotics Research Engineer (Part-Time)</h3>
-                <h4>AI Robotics | Apr 2025 – Present</h4>
-                <ul>
-                    <li>Developing a transformer-based computer vision model to detect welding defects in automotive components such as air fillers, cuts, and insufficient weld thickness.</li>
-                    <li>Assisting in the control and programming of Yaskawa industrial robots for automated manufacturing, using vision-based feedback for enhanced precision.</li>
-                </ul>
-            </div>
-
-            <div class="timeline-item">
-                <h3>Full-Time Researcher</h3>
-                <h4>Physical Intelligence Lab, Kyungpook National University | Mar 2024 – Present</h4>
-                <ul>
-                    <li>Built a vision-based robotic system using YOLOv11 for cucumber detection integrated with a ViperX-300s arm and AGV for autonomous harvesting.</li>
-                    <li>Designed an automated tissue-handling system on the ALOHA robot using Action Chunk Transformers.</li>
-                    <li>Implemented Action Chunk Transformers on a 7-DoF robot arm for dynamic pick-and-place tasks.</li>
-                    <li>Researching diffusion models for robotic path planning and enhancing Deep State Space Models with time-varying dynamics.</li>
-                </ul>
-            </div>
-
-            <div class="timeline-item">
-                <h3>Research Assistant (Part-Time)</h3>
-                <h4>Physical Intelligence Lab, Kyungpook National University | Sept 2022 – Feb 2024</h4>
-                <ul>
-                    <li>Gained applied knowledge in control systems, ROS, and reinforcement learning through hands-on research.</li>
-                    <li><strong>Drone Control:</strong> Enabled keyboard-based navigation with object detection.</li>
-                    <li><strong>Drone Trajectory Tracking:</strong> Developed MPC algorithms for high-precision flight paths.</li>
-                    <li><strong>Leader-Follower Robot Tracking:</strong> Implemented ICLMPC for multi-robot coordination using TurtleBots.</li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-    <!-- Projects Section -->
-    <section id="projects">
+    <section id="experience" class="section">
         <div class="container">
-            <div class="section-title">
-                <h2>Projects</h2>
+            <div class="section-header fade-in">
+                <h2>Experience</h2>
+                <p>My professional journey in robotics and AI research</p>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Discrete Latent Diffusion Motion Planning</h3>
-                    <img src="assets/images/DLDMP.png" alt="Discrete Latent Diffusion Motion Planning" class="project-image" data-video="videos/DLDMP.mp4">
-                    <p>Presented at NODYCON 2025, this project introduces a discrete latent diffusion approach for efficient, collision-free motion planning in robotics. By leveraging VQ-VAE and transformer-based decoding, it enables high-quality trajectory generation with lower computational cost.</p>
-                    <a href="#" class="video-btn" data-video="videos/DLDMP.mp4">Click Here to Watch Video</a>
-                    
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Apr 2025 — Present</div>
+                        <div class="timeline-title">Researcher Consultant (Part-Time)</div>
+                        <div class="timeline-subtitle">AI Robotics</div>
+                        <div class="timeline-description">Developing transformer-based computer vision models for welding defect detection • Programming Yaskawa industrial robots for automated manufacturing • Vision-based feedback systems for enhanced precision</div>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>Cucumber Harvesting</h3>
-                    <img src="assets/images/cucumber.jpeg" alt="Cucumber Harvesting" class="project-image" data-video="videos/Cucumber_Harvesting.mp4">
-                    <p>Developed a cucumber harvesting system using YOLOv11 object detection that identifies cucumbers and triggers coordinated actions between a ViperX 300s robotic arm and an Automated Guided Vehicle (AGV).</p>
-                    <a href="#" class="video-btn" data-video="videos/Cucumber_Harvesting.mp4">Click Here to Watch Video</a>
-                    
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Mar 2024 — Present</div>
+                        <div class="timeline-title">Full-Time Researcher</div>
+                        <div class="timeline-subtitle">Physical Intelligence Lab, Kyungpook National University</div>
+                        <div class="timeline-description">Built vision-based robotic systems using YOLOv11 • Designed automated tissue-handling systems • Implemented Action Chunk Transformers • Research in diffusion models for robotic path planning</div>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>Dual-Arm Robotic Tissue Handling System</h3>
-                    <img src="assets/images/tissueimg.png" alt="Tissue " class="project-image" data-video="videos/tissue.mp4">
-                    <p> This system uses two coordinated robotic arms — one loads tissues into an empty box, while the other transfers the filled box to a designated location automating hygienic and efficient tissue handling..</p>
-                    <a href="#" class="video-btn" data-video="videos/tissue.mp4">Click Here to Watch Video</a>
-                </div>
-                <div class="project-card">
-                    <h3>Vision guided imitation learning using ACT </h3>
-                    <img src="assets/images/robo.jpeg" alt="ACT Franka" class="project-image" data-video="videos/ACT.mp4">
-                    <p>Implementing Action Chunk Transformers on Franka robot arms for more efficient and natural robotic manipulation tasks.</p>
-                    <a href="#" class="video-btn" data-video="videos/ACT.mp4">Click Here to Watch Video</a>
-                </div>
-                <div class="project-card">
-                    <h3>Behaviour cloning</h3>
-                    <img src="assets/images/pic3.png" alt="Fuzzy Leader Follower" class="project-image" data-video="videos/video3.mp4">
-                    <p>Using neural networks to teach a Franka Emika Panda robot arm to mimic human-drawn trajectories enabling precise motion control without traditional programming.</p>
-                    <a href="#" class="video-btn" data-video="videos/video3.mp4">Click Here to Watch Video</a>
-                </div>
-                <div class="project-card">
-                    <h3>Leader follower trajectory tracking using ICLMPC</h3>
-                    <img src="assets/images/pic4.png" alt="Franka Arm Robot" class="project-image" data-video="videos/video1.mp4">
-                    <p>Iterative Cost Learning Model Predictive Control is applied on turtlebot leader follower tracking for achieving better control and more optimal cost. This algorithm makes the follower more autonomous and reliable.</p>
-                    <a href="#" class="video-btn" data-video="videos/video1.mp4">Click Here to Watch Video</a>
-
-                </div>
-                <div class="project-card">
-                    <h3>Fuzzy based Leader follower control</h3>
-                    <img src="assets/images/pic5.png" alt="Drone Trajectory Tracking" class="project-image" data-video="videos/fuzzy_based.mp4">
-                    <p>Using fuzzy logic controllers to implement leader-follower behavior in multi-robot systems for coordinated movement.</p>
-                    <a href="#" class="video-btn" data-video="videos/fuzzy_based.mp4">Click Here to Watch Video</a>
-                </div>
-                <div class="project-card">
-                    <h3>Drone control with object detection</h3>
-                    <img src="assets/images/pic6.png" alt="ICLMCP" class="project-image" data-video="videos/Tello_Drone_object_detection.mp4">
-                    <p>Developed an intelligent drone control system that integrates real-time object detection<p>
-                    <a href="#" class="video-btn" data-video="videos/Tello_Drone_object_detection.mp4">Click Here to Watch Video</a>
-                </div>
-                <div class="project-card">
-                    <h3>Drone control with keyboard</h3>
-                    <img src="assets/images/pic7.png" alt="Drone" class="project-image" data-video="videos/Tello_drone_with_keyboard.mp4">
-                    <p> User-friendly drone control system operated via standard keyboard inputs, making aerial robotics accessible to novice users without specialized equipment. Features intuitive commands for real-time flight operation and basic maneuvers.</p>
-                    <a href="#" class="video-btn" data-video="videos/Tello_drone_with_keyboard.mp4">Click Here to Watch Video</a>
-                </div>
-                <div class="project-card">
-                    <h3>Smart Home Automation</h3>
-                    <img src="assets/images/smarthome1.png" alt="Smart Home Automation" class="project-image">
-                    <p>Designing and implementing comprehensive smart home automation systems with IoT devices for improved comfort, security, and energy efficiency.</p>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Sept 2022 — Feb 2024</div>
+                        <div class="timeline-title">Research Assistant (Part-Time)</div>
+                        <div class="timeline-subtitle">Physical Intelligence Lab, Kyungpook National University</div>
+                        <div class="timeline-description">Developed drone control systems • Implemented MPC algorithms • Multi-robot coordination using TurtleBots • Hands-on experience in ROS and reinforcement learning</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Overlay -->
+<!-- Projects Section -->
+<section id="projects" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Featured Projects</h2>
+      <p>Innovative solutions in robotics and artificial intelligence</p>
+    </div>
+
+    <!-- Cards are generated from JS -->
+    <div class="projects-grid" id="projectGrid"></div>
+  </div>
+</section>
+
+<!-- Project Modal (centered frame, not fullscreen) -->
+<div id="projectModal" style="
+  display:none; position:fixed; inset:0; z-index:9999;
+  background: rgba(0,0,0,0.6);
+  align-items:center; justify-content:center;">
+  <div style="
+    width:min(920px, 90vw); max-height:85vh; overflow:auto;
+    background:#ffffff; border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,.35);
+    position:relative; padding:22px 22px 82px;">
+    <button id="pmClose" aria-label="Close" title="Close" style="
+      position:absolute; top:12px; right:12px; border:none; background:#f2f2f2;
+      font-size:20px; line-height:1; width:38px; height:38px; border-radius:10px; cursor:pointer;">×</button>
+
+    <div id="pmContent">
+      <!-- filled by JS -->
+    </div>
+
+    <div style="
+      position:sticky; bottom:0; left:0; right:0; background:#fff;
+      display:flex; gap:10px; justify-content:space-between; align-items:center; padding:12px 0 0; margin-top:18px;">
+      <div style="display:flex; gap:10px;">
+        <button id="pmPrev" style="padding:10px 14px; border:none; border-radius:8px; background:#111; color:#fff; cursor:pointer;">◀ Previous</button>
+        <button id="pmNext" style="padding:10px 14px; border:none; border-radius:8px; background:#111; color:#fff; cursor:pointer;">Next ▶</button>
+      </div>
+      <div style="opacity:.7; font-size:13px;" id="pmIndex"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Full, detailed project data (9 projects) ---------- */
+const projectsData = [
+  {
+    title: "Discrete Latent Diffusion Motion Planning",
+    abstract: `
+      Presented at NODYCON 2025, this project introduces a discrete latent diffusion 
+      approach for efficient, collision-free motion planning in robotics. 
+      By leveraging VQ-VAE and transformer-based decoding, it enables 
+      high-quality trajectory generation with lower computational cost.
+    `,
+    introHtml: `
+      <p>
+        The approach encodes trajectories into a discrete latent space using 
+        Vector Quantized Variational Autoencoder (VQ-VAE), followed by 
+        a diffusion process in this latent space to explore possible motion paths. 
+        A transformer-based decoder reconstructs continuous, feasible trajectories 
+        while avoiding obstacles and minimizing path length.
+      </p>
+      <p>
+        Compared to standard continuous diffusion methods, the discrete latent 
+        representation significantly reduces computational requirements, enabling 
+        faster real-time planning for robotic manipulators and mobile robots.
+      </p>
+      <img src="assets/images/nody.png" alt="Nodycon img" style="width:100%; border-radius:8px;">
+
+    `,
+    video: "https://www.youtube.com/embed/wrXGvtw6mYo" // FIXED: removed /shorts/
+  },
+    /* 1 */
+  {
+    
+    title: "Transformer Based Vision-Guided Tissue Processing",
+    abstract: `
+      This project automates tissue packing using ViperX robotic arms and the Action Chunking Transformer (ACT). A leader–follower setup collected demonstrations to train the ACT model for autonomous operation, achieving <strong>&lt;15% performance gap</strong> versus human teleoperation.
+    `,
+    introHtml: `
+      <h4>Hardware Configuration</h4>
+      <ul>
+        <li><strong>Leader–Follower System</strong></li>
+        <li><em>Leader:</em> Two ViperX 300 S arms (750&nbsp;mm reach, 6&nbsp;DOF, 750&nbsp;g payload) – motions recorded during tissue packing.</li>
+        <li><em>Follower:</em> Two ViperX Aloha arms mirroring leader via real-time joint position streaming at 50&nbsp;Hz.</li>
+      </ul>
+
+      <h4>Dataset Generation</h4>
+      <ul>
+        <li><strong>Collected:</strong> Joint angle sequences, gripper states, time-synchronized camera feeds (2 viewpoints).</li>
+        <li><strong>Demonstrations:</strong> 100+ teleoperated tissue-folding and box-packing sequences.</li>
+      </ul>
+
+      <h4>ACT Implementation</h4>
+      <ul>
+        <li><strong>Chunk size:</strong> 14 actions (0.16&nbsp;s horizon) balancing responsiveness and error correction.</li>
+        <li><strong>HDF5 contents:</strong>
+          <ul>
+            <li>action: shape (149, 14)</li>
+            <li>observations/images/top: shape (149, 480, 640, 3)</li>
+            <li>observations/qpos: shape (149, 14)</li>
+          </ul>
+        </li>
+        <li><strong>Transformer:</strong> 6-layer encoder (vision + proprioception fusion), 4-layer decoder for action-sequence prediction.</li>
+      </ul>
+
+      <h4>Training Protocol</h4>
+      <ul>
+        <li><strong>Loss:</strong> L1 reconstruction + KL divergence (β=0.5)</li>
+        <li><strong>Augmentations:</strong> Random lighting, synthetic occlusions (wrinkles), joint position noise (σ=0.8°)</li>
+      </ul>
+    `,
+    resultsHtml: `
+      <h4>Results</h4>
+      <table style="width:100%; border-collapse:collapse;">
+        <thead>
+          <tr><th style="text-align:left;border-bottom:1px solid #ddd;padding:6px;">Metric</th>
+              <th style="text-align:left;border-bottom:1px solid #ddd;padding:6px;">Leader</th>
+              <th style="text-align:left;border-bottom:1px solid #ddd;padding:6px;">ACT Follower</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:6px;border-bottom:1px solid #eee;">Success Rate</td><td style="padding:6px;border-bottom:1px solid #eee;">92.4%</td><td style="padding:6px;border-bottom:1px solid #eee;">85.7%</td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #eee;">Cycle Time</td><td style="padding:6px;border-bottom:1px solid #eee;">4.2 s/item</td><td style="padding:6px;border-bottom:1px solid #eee;">4.8 s/item</td></tr>
+          <tr><td style="padding:6px;border-bottom:1px solid #eee;">Positional Error (σ)</td><td style="padding:6px;border-bottom:1px solid #eee;">0.5 mm</td><td style="padding:6px;border-bottom:1px solid #eee;">1.1 mm</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;"><em>Conclusion:</em> ACT achieved autonomous packing within 15% of human performance; future work: real-time haptics and dynamic chunk-size adaptation.</p>
+    `,
+    video: "https://www.youtube.com/embed/1QF7tqNROBk" // Replace this with your YouTube embed link
+  },
+
+  /* 2 */
+  {
+    title: "Vision-Guided Imitation Learning using Action Chunk Transformer",
+    abstract: `
+      Single-arm robotic manipulation for pick-and-place using ACT. A CVAE predicts sequences of "action chunks," integrating vision + joint data for higher precision and reliability compared to traditional step-wise behavior cloning.
+    `,
+    introHtml: `
+      <ul>
+        <li><strong>Learning setup:</strong> Manual expert demonstrations captured in real time.</li>
+        <li><strong>Model:</strong> ACT with CVAE predicts action chunks for efficient execution.</li>
+        <li><strong>Benefit:</strong> Adapts from dual-arm to single-arm, improving speed and precision.</li>
+      </ul>
+      <img src="assets/images/actsetup.png" alt="ACT Setup" style="width:100%; border-radius:8px;">
+    `,
+    resultsHtml: `<p><strong>Result:</strong> Demonstrated faster, more precise pick-and-place. Video evidence included.</p>`,
+    video: "https://www.youtube.com/embed/j9TWFwMyjRE" // Replace this with your YouTube embed link
+  },
+
+  /* 3 */
+  {
+    title: "Autonomous Harvesting using Object Detection",
+    abstract: `
+      YOLOv11-based cucumber detection triggers coordinated actions between a ViperX 300s arm robot and an AGV. The project also builds a dataset pairing images with executed robot actions to advance agricultural robotics.
+    `,
+    introHtml: `
+      <h4>Task & Aim</h4>
+      <p>Cucumber detection → action generation for ViperX 300s and AGV. Dataset supports future learning methods.</p>
+      <h4>Prerequisites</h4>
+      <ul>
+        <li>Ubuntu 20.04, ROS, Interbotix packages, Python</li>
+        <li><code>interbotix_ws</code> workspace</li>
+      </ul>
+      <h4>Installation</h4>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">git clone https://github.com/sainavaneet/Harvesting.git
+cd Harvesting/
+pip install -e .</pre>
+    `,
+    resultsHtml: `<p><strong>Result:</strong> Real-world tests showed high detection performance and successful coordinated harvesting. Video included.</p>`,
+    video: "https://www.youtube.com/embed/4m3YtvEwKPI"
+  },
+
+  /* 4 */
+  {
+    title: "Tello Drone control with object detection",
+    abstract: `
+      Control a DJI Tello while running real-time object detection on the live video stream 
+    `,
+introHtml: `
+  <h4>Main Control Loop</h4>
+  <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">
+thres = 0.50
+nmsThres = 0.2
+
+# Load model and class names
+
+while True:
+    # Capture frame
+    # Run detection
+    # Annotate and display frame
+    # Accept keyboard input for control
+  </pre>
+
+  <h4>Object Detection</h4>
+  <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">
+thres = 0.50
+nmsThres = 0.2
+# Load model & classes
+# For each frame: capture → detect → annotate → display
+  </pre>
+`,
+    resultsHtml: `<p><strong>Result:</strong> Smooth manual flight with accurate real-time detections, visualized on the video feed.</p>`,
+    video: "videos/Tello_Drone_object_detection.mp4"
+  },
+
+  /* 5 */
+  {
+    title: "Leader–Follower Trajectory Tracking using ICLMPC",
+    abstract: `
+      Hybrid control fusing MPC (predictive optimization) and ILC (learning from past errors) to enhance mobile-robot leader–follower tracking accuracy and robustness.
+    `,
+    introHtml: `
+      <h4>Parameters (Dec 5, 2023)</h4>
+      <ul>
+        <li>Total Time <em>T</em> = 10 s</li>
+        <li>State Weight <em>Q</em> = diag([1,1,1])</li>
+        <li>Control Weight <em>R</em> = diag([0.1,0.1])</li>
+        <li>Sampling Time γ = 0.1 s</li>
+        <li>Input limits: v ∈ [0.0, 0.3] m/s, ω ∈ [−π/4, π/4] rad/s</li>
+        <li>Gain Matrix K =
+<pre style="display:inline-block;background:#f6f6f6;padding:8px;border-radius:8px;">0.4662  0.2978  0.2067
+0.8341  1.2165  1.3492</pre>
+        </li>
+      </ul>
+
+      <h4>Quadratic Cost (single timestep)</h4>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">J_total = Σ_{k=1..N} ( x_k^T Q x_k + u_k^T R u_k ),  with N = 2</pre>
+    `,
+    resultsHtml: `
+      <p><strong>Results:</strong> Total cost LMPC (J=10): 8.9852 vs H₂: 18.7759 (ICLMPC significantly lower).</p>
+      <div style="display:grid; gap:10px;">
+        <img src="assets/images/traj.png" alt="Trajectory plot" style="width:100%; border-radius:8px;">
+        <img src="assets/images/cost.png" alt="Cost comparison plot" style="width:100%; border-radius:8px;">
+      </div>
+    `,
+    video: "videos/ICLMPC.mp4"
+  },
+
+  /* 6 */
+  {
+    title: "Behavior Cloning with Diffusion Processes",
+    abstract: `
+      Combines diffusion process modeling with imitation learning to clone expert behavior. A neural net maps end-effector positions (ℝ³) to joint angles (ℝ⁷); expert data generated via IK-solver.
+    `,
+    introHtml: `
+      <h4>Diffusion Processes</h4>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">dX_t = μ(X_t,t) dt + σ(X_t,t) dW_t</pre>
+
+      <h4>Imitation Learning Objective</h4>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">min_π  E_{(s,a*)~D} [ -log π(a*|s) ]</pre>
+
+      <h4>Combined Objective</h4>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">min_π  E_{(s,a*)~D, X_t~SDE} [ -log π(a*|s) + λ·L(X_t, π(s)) ]</pre>
+
+      <h4>Neural Network</h4>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">x∈ℝ³ → h1=ReLU(W1x+b1) → h2=ReLU(W2h1+b2) → h3=ReLU(W3h2+b3) → y=W4h3+b4 (y∈ℝ⁷)</pre>
+
+      <h4>Loss & Optimization</h4>
+      <ul>
+        <li>MSE loss: L(θ) = (1/N) Σ || f(xᵢ;θ) − yᵢ ||²</li>
+        <li>Adam: η=0.001, β₁=0.9, β₂=0.999, ε=1e−8</li>
+        <li>Training: 10,000 epochs (≈11.92 s)</li>
+      </ul>
+    `,
+    resultsHtml: `<p><strong>Results:</strong> Accurate cloning of expert trajectories; matplotlib plots used for visualization. Video included.</p>`,
+    video: "https://www.youtube.com/embed/DComOQLomko" // Replace this with your YouTube embed link
+  },
+
+  /* 7 */
+  {
+    title: "Drone Control with Keyboard",
+    abstract: `
+      Python interface to pilot a drone using keyboard inputs: takeoff, landing, directional motion, rotation, and altitude control.
+    `,
+    introHtml: `
+      <h4>Prerequisites</h4>
+      <ul>
+        <li>Python 3.x, <code>Olympe</code>, <code>pynput</code></li>
+      </ul>
+      <pre style="white-space:pre-wrap;background:#f6f6f6;padding:10px;border-radius:8px;">pip install olympe pynput</pre>
+
+      <h4>Usage</h4>
+      <ol>
+        <li>Connect to the drone's Wi-Fi.</li>
+        <li>Set <code>DRONE_IP</code> (default 10.202.0.1).</li>
+        <li>Run: <code>python script.py</code></li>
+      </ol>
+
+      <h4>Key Mappings</h4>
+      <ul>
+        <li><code>t</code>: Takeoff · <code>l</code>: Landing · <code>esc</code>: Quit</li>
+        <li><code>w/a/s/d</code>: Forward/Left/Backward/Right</li>
+        <li>Arrow Up/Down: Altitude ±</li>
+        <li>Arrow Left/Right: Rotate left/right</li>
+      </ul>
+
+      <p><em>Note:</em> Fly safely and comply with local regulations.</p>
+    `,
+    resultsHtml: `<p><strong>Result:</strong> Fully functional manual flight control. Video included.</p>`,
+    video: "videos/Tello_drone_with_keyboard.mp4"
+  },
+
+  /* 8 */
+  {
+    title: "Fuzzy-based Leader–Follower Control",
+    abstract: `
+      Fuzzy-logic controller for leader–follower formation. Inputs like relative distance, heading error, and velocity are fuzzified to generate adaptive motion commands.
+    `,
+    introHtml: `
+      <ul>
+        <li>Define fuzzy variables & rules (e.g., "close/far", "slow/fast").</li>
+        <li>Fuzzy inference maps sensor inputs → follower commands.</li>
+        <li>Adaptive in dynamic environments.</li>
+      </ul>
+      <p><strong>Github link:</strong> <a href="https://github.com/manishalingala/Fuzzy_based_leader_follower" target="_blank" rel="noopener">GitHub – Fuzzy_based_leader_follower</a></p>
+    `,
+    resultsHtml: `<p><strong>Result:</strong> Video demonstrates smooth tracking using fuzzy control.</p>`,
+    video: "videos/fuzzy_based.mp4"
+  },
+
+  /* 9 */
+  {
+    title: "Smart Home Using IoT",
+    abstract: `
+      ESP32-based home automation enabling control via cloud, mobile app, voice (Google Assistant + IFTTT), and timer scheduling. Built from scratch with relays and basic components.
+    `,
+    introHtml: `
+      <h4>Introduction</h4>
+      <p>Smart-home prototype developed (Mar 1 – Jul 31, 2022) by Electronics & Electrical Engineering participants. Goal: convenience, security, and efficiency with multi-mode control.</p>
+      <ul>
+        <li><strong>Control Modes:</strong> Cloud · Mobile App · Voice · Timer</li>
+      </ul>
+    `,
+    resultsHtml: `
+      <div style="display:grid; gap:10px;">
+        <img src="assets/images/circuit.png" alt="Circuit diagram" style="width:100%; border-radius:8px;">
+        <img src="assets/images/voice.png" alt="Cloud/app control" style="width:100%; border-radius:8px;">
+        <img src="assets/images/smarthome.png" alt="Final model" style="width:100%; border-radius:8px;">
+      </div>
+    `,
+    video: null
+  }
+];
+
+/* ---------- Build cards ---------- */
+const grid = document.getElementById("projectGrid");
+projectsData.forEach((p, i) => {
+  const card = document.createElement("div");
+  card.className = "project-card fade-in";
+  card.style.cursor = "pointer";
+  card.innerHTML = `
+    <div class="project-content">
+      <h3 class="project-title">${p.title}</h3>
+      <p class="project-description">${p.abstract}</p>
+      <div class="project-tags">
+        <span class="project-tag">Details</span>
+        ${p.video ? `<span class="project-tag">Video</span>` : `<span class="project-tag">Images</span>`}
+      </div>
+    </div>`;
+  card.addEventListener("click", () => openProject(i));
+  grid.appendChild(card);
+});
+
+/* ---------- Modal logic (open / render / nav) ---------- */
+let currentProject = 0;
+const modal = document.getElementById("projectModal");
+const pmClose = document.getElementById("pmClose");
+const pmContent = document.getElementById("pmContent");
+const pmIndex = document.getElementById("pmIndex");
+
+function renderProject(i){
+  const p = projectsData[i];
+  
+  let videoSection = '';
+  if (p.video) {
+    if (p.video.includes("youtube.com") || p.video.includes("youtu.be")) {
+      // YouTube embed
+      videoSection = `
+        <section style="margin:14px 0;">
+          <h3 style="margin:0 0 6px;">Demonstration Video</h3>
+          <div class="video-wrapper">
+            <iframe src="${p.video}" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+          </div>
+        </section>`;
+    } else {
+      // Local video
+      videoSection = `
+        <section style="margin:14px 0;">
+          <h3 style="margin:0 0 6px;">Demonstration Video</h3>
+          <video src="${p.video}" controls style="width:100%; border-radius:10px;"></video>
+        </section>`;
+    }
+  }
+  
+  pmContent.innerHTML = `
+    <h2 style="margin:6px 0 8px;">${p.title}</h2>
+    <div style="margin:.25rem 0 1rem; color:#555;">${p.abstract}</div>
+
+    ${p.introHtml ? `<section style="margin:14px 0;"><h3 style="margin:0 0 6px;">Introduction</h3>${p.introHtml}</section>` : ""}
+
+    ${p.resultsHtml ? `<section style="margin:14px 0;"><h3 style="margin:0 0 6px;">Results</h3>${p.resultsHtml}</section>` : ""}
+
+    ${videoSection}
+  `;
+  pmIndex.textContent = `Project ${i+1} of ${projectsData.length}`;
+}
+
+function openProject(i){
+  currentProject = i;
+  renderProject(i);
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function closeProject(){
+  modal.style.display = "none";
+  document.body.style.overflow = "";
+}
+
+document.getElementById("pmPrev").addEventListener("click", () => {
+  currentProject = (currentProject - 1 + projectsData.length) % projectsData.length;
+  renderProject(currentProject);
+});
+
+document.getElementById("pmNext").addEventListener("click", () => {
+  currentProject = (currentProject + 1) % projectsData.length;
+  renderProject(currentProject);
+});
+
+pmClose.addEventListener("click", closeProject);
+modal.addEventListener("click", (e) => { if (e.target === modal) closeProject(); });
+document.addEventListener("keydown", (e) => {
+  if (modal.style.display === "flex") {
+    if (e.key === "Escape") closeProject();
+    if (e.key === "ArrowLeft") document.getElementById("pmPrev").click();
+    if (e.key === "ArrowRight") document.getElementById("pmNext").click();
+  }
+});
+</script>
+
+    <!-- Enhanced Video Overlay -->
     <div class="video-overlay">
         <div class="video-container">
             <span class="close-video">&times;</span>
-            <video width="100%" controls>
+            <video width="100%" autoplay muted loop id="projectVideo">
                 <source src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-        </div>
-    </div>
-
-    
-
-    <!-- Publications Section -->
-<section id="publications">
-  <div class="container">
-      <div class="section-title">
-          <h2>Papers & Publications</h2>
-      </div>
-      <div class="publications-grid">
-          <div class="publication-card">
-              <h3>Vision-Guided Imitation Learning Using Action Chunk Transformers</h3>
-              <p><strong>Conference:IEMEK 2024 (Poster presentation)</p>
-              <p><strong>Goal:Adapt the ACT algorithm for single-arm robots in vision-based manipulation tasks.</p>
-              <p><strong>Method:</strong> Use CVAE to predict grouped actions ("action chunks") from visual and motion data.</p>
-              <p><strong>Training:</strong> Learned from visual demonstrations of pick-and-place tasks.</p>
-              <p><strong>Result:</strong> Improved speed, precision, and reliability in single-arm robotic control.</p>
-              <div class="publication-links">
-                  <a href="videos/ACT.mp4" class="publication-link" target="_blank">watch video</a>
-                  <a href="assets/images/iemek_paper.pdf" class="publication-link pdf-link" download><i class="fas fa-file-pdf"></i> Download PDF</a>
-              </div>
-          </div>
-          <div class="publication-card">
-              <h3>Imitating Precision: Applying Behavioral Cloning to Robot Manipulator Tasks</h3>
-              <p><strong>Goal:</strong> Train a robot to mimic expert demonstrations using behavioral cloning.</p>
-              <p><strong>Method:</strong> Use a neural network to map end-effector positions to joint angles.</p>
-              <p><strong>Training:</strong> Collected data from human-guided demonstrations on a 7-DoF robot arm.</p>
-              <p><strong>Result:</strong> Achieved high accuracy and smooth trajectory following, outperforming traditional controllers.</p>
-              <div class="publication-links">
-                  <a href="videos/video3.mp4" class="publication-link" target="_blank">Watch Video</a>
-                  <a href="assets/images/behavioural_cloning.pdf" class="publication-link pdf-link" download><i class="fas fa-file-pdf"></i> Download PDF</a>
-              </div>
-          </div>
-      </div>
-      <!-- Publication: QROOT -->
-<div class="publication-card">
-  <h3>QROOT: An Integrated Diffusion Transformer and Reinforcement Learning Approach for Quadrupedal Locomotion</h3>
-  <p><strong>Status:</strong> Submitted a full length paper to <em>NeurIPS 2025</em> (under double-blind review) – May 2025</p>
-</div>
-
-<!-- Publication: Vision-Guided Imitation -->
-<div class="publication-card">
-  <h3>Vision-Guided Predictive Action Imitation Learning with Discrete Latent Encoding for Multitasking Robots</h3>
-  <p><strong>Status:</strong> Submitted a journal article to <em>Engineering Applications of Artificial Intelligence</em> – April 2025 (under review)</p>
-</div>
-
-  </div>
-</section>
-<!-- Achievements Section -->
-<section id="achievements">
-  <div class="container">
-    <div class="section-title">
-      <h2>Achievements</h2>
-    </div>
-
-    <div class="achievement-card">
-      <div class="achievement-text">
-        <h3>Best Thesis Award – KNU-EERC</h3>
-        <p>Received the best thesis award at the KNU-EERC event – July 2025</p>
-      </div>
-      <div class="achievement-images">
-        <img src="assets/images/pic9.jpeg" alt="Thesis Award" />
-        <img src="assets/images/pic10.png" alt="Lingala Manisha with Award" />
-      </div>
-    </div>
-
-    <div class="achievement-card">
-      <div class="achievement-text">
-        <h3>NodyCon Oral Presentation – DLDMP</h3>
-        <p>Delivered an oral presentation on DLDMP at NodyCon, New York, USA – June 2025</p>
-      </div>
-      <div class="achievement-images">
-    <img src="assets/images/pic11.png" alt="Lingala Manisha with Award" />
-    <img src="assets/images/pic12.png" alt="Lingala Manisha with Award" />
-
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- Resume Section -->
-<section id="resume">
-    <div class="container">
-        <div class="section-title">
-            <h2>Resume</h2>
-        </div>
-        <div class="resume-content" style="text-align: center;">
-            <p>Click on the image below to view or download my complete resume</p>
-            <a href="assets/images/Resume.pdf" target="_blank">
-                <img src="assets/images/1.png" alt="Resume Preview" style="max-width: 300px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;">
-                <img src="assets/images/2.png" alt="Resume Preview" style="max-width: 300px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; cursor: pointer;">
-            </a>
-            <p style="margin-top: 20px;">
-                <a href="assets/images/Resume.pdf" download class="publication-link" style="font-weight: 500;">
-                    <i class="fas fa-file-pdf"></i> Download Resume PDF
-                </a>
-            </p>
-        </div>
-        
-    </div>
-</section>
-<!-- Contact Section -->
-<section id="contact">
-    <div class="container">
-        <div class="section-title">
-            <h2>Contact Me</h2>
-        </div>
-        <div class="contact-content">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <p>manishalingala2002@gmail.com</p>
+            
+            <div class="video-controls">
+                <button class="video-control-btn" onclick="togglePlayPause()" id="playPauseBtn">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="video-control-btn" onclick="setSpeed(0.75)">0.75x</button>
+                <button class="video-control-btn" onclick="setSpeed(1)">1x</button>
+                <button class="video-control-btn" onclick="setSpeed(1.25)">1.25x</button>
+                <button class="video-control-btn" onclick="setSpeed(1.5)">1.5x</button>
+                <button class="video-control-btn" onclick="setSpeed(2)">2x</button>
+                <span class="speed-display" id="speedDisplay">1x</span>
+            </div>
+            
+            <div class="project-info">
+                <div class="project-abstract">
+                    <h4>Project Overview</h4>
+                    <p id="projectAbstract"></p>
                 </div>
-                <h3>Social Links</h3>
-                <div class="contact-item">
-                    <i class="fab fa-github"></i>
-                    <a href="https://github.com/manishalingala" target="_blank">GitHub</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-form-button">
-                    <a href="contact.html" class="btn btn-primary">Contact Form</a>
+                <div class="project-abstract">
+                    <h4>Project Title</h4>
+                    <p id="projectTitle"></p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Gallery Section -->
+<section id="gallery" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2>Gallery</h2>
+      <p>Visual journey through my research and achievements</p>
+    </div>
+
+    <div class="gallery-tabs">
+      <div class="gallery-tab active" data-category="all">All Photos</div>
+      <div class="gallery-tab" data-category="research">Research Work</div>
+      <div class="gallery-tab" data-category="conferences">Conferences</div>
+      <div class="gallery-tab" data-category="awards">Awards</div>
+      <div class="gallery-tab" data-category="lab">Lab Life</div>
+      <div class="gallery-tab" data-category="robots">Robots</div>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- 📸 Conferences: 11, 12, 13, 15, 16 -->
+      <div class="gallery-item fade-in" data-category="conferences">
+        <img src="assets/images/pic11.png" alt="Conference 11">
+        <div class="gallery-item-info">
+          <h4>Conference</h4>
+          <p>Presentation moment</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="conferences">
+        <img src="assets/images/pic12.png" alt="Conference 12">
+        <div class="gallery-item-info">
+          <h4>Conference</h4>
+          <p>Presentation moment</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="conferences">
+        <img src="assets/images/pic13.png" alt="Conference 13">
+        <div class="gallery-item-info">
+          <h4>Conference</h4>
+          <p>Presentation moment</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="conferences">
+        <img src="assets/images/pic15.jpeg" alt="Conference 15">
+        <div class="gallery-item-info">
+          <h4>Conference</h4>
+          <p>Presentation moment</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="conferences">
+        <img src="assets/images/pic16.jpeg" alt="Conference 16">
+        <div class="gallery-item-info">
+          <h4>Conference</h4>
+          <p>Presentation moment</p>
+        </div>
+      </div>
+
+      <!-- 🛠 Projects: 3, 4, 5, 6, 7 -->
+      <div class="gallery-item fade-in" data-category="research robots">
+        <img src="assets/images/pic3.png" alt="Project 3">
+        <div class="gallery-item-info">
+          <h4>Project</h4>
+          <p>Robotics research</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="research robots">
+        <img src="assets/images/pic4.png" alt="Project 4">
+        <div class="gallery-item-info">
+          <h4>Project</h4>
+          <p>Robotics research</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="research robots">
+        <img src="assets/images/pic5.png" alt="Project 5">
+        <div class="gallery-item-info">
+          <h4>Project</h4>
+          <p>Robotics research</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="research robots">
+        <img src="assets/images/pic6.png" alt="Project 6">
+        <div class="gallery-item-info">
+          <h4>Project</h4>
+          <p>Robotics research</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="research robots">
+        <img src="assets/images/pic7.png" alt="Project 7">
+        <div class="gallery-item-info">
+          <h4>Project</h4>
+          <p>Robotics research</p>
+        </div>
+      </div>
+
+      <!-- 🏆 Achievements: 8, 9, 10 -->
+      <div class="gallery-item fade-in" data-category="awards">
+        <img src="assets/images/pic8.png" alt="Achievement 8">
+        <div class="gallery-item-info">
+          <h4>Award</h4>
+          <p>Achievement</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="awards">
+        <img src="assets/images/pic9.jpeg" alt="Achievement 9">
+        <div class="gallery-item-info">
+          <h4>Award</h4>
+          <p>Achievement</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in" data-category="awards">
+        <img src="assets/images/pic10.png" alt="Achievement 10">
+        <div class="gallery-item-info">
+          <h4>Award</h4>
+          <p>Achievement</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-    <!-- Footer -->
-    <footer>
+
+
+    <!-- Publications Section -->
+    <section id="publications" class="section">
         <div class="container">
-            <p>&copy; 2025 Lingala Manisha. All rights reserved.</p>
+            <div class="section-header fade-in">
+                <h2>Publications & Research</h2>
+                <p>Contributing to the future of robotics and AI</p>
+            </div>
+            <div class="publications-grid">
+                <div class="publication-card fade-in">
+                    <h3 class="publication-title">Vision-Guided Imitation Learning Using Action Chunk Transformers</h3>
+                    <div class="publication-meta">IEMEK 2024 Conference • Poster Presentation</div>
+                    <p>Adapted ACT algorithm for single-arm robots in vision-based manipulation tasks using CVAE to predict grouped actions from visual and motion data, achieving improved speed, precision, and reliability.</p>
+                    <div class="publication-links">
+                        <a href="videos/ACT.mp4" class="publication-link">
+                            <i class="fas fa-play"></i>
+                            Watch Demo
+                        </a>
+                        <a href="assets/images/iemek_paper.pdf" class="publication-link" download>
+                            <i class="fas fa-file-pdf"></i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="publication-card fade-in">
+                    <h3 class="publication-title">Imitating Precision: Behavioral Cloning for Robot Manipulators</h3>
+                    <div class="publication-meta">Research Paper • Neural Network Implementation</div>
+                    <p>Developed a neural network system to map end-effector positions to joint angles, achieving high accuracy and smooth trajectory following that outperforms traditional controllers.</p>
+                    <div class="publication-links">
+                        <a href="videos/video3.mp4" class="publication-link">
+                            <i class="fas fa-play"></i>
+                            Watch Demo
+                        </a>
+                        <a href="assets/images/behavioural_cloning.pdf" class="publication-link" download>
+                            <i class="fas fa-file-pdf"></i>
+                            Download PDF
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="publication-card fade-in">
+                    <h3 class="publication-title">QROOT: Integrated Diffusion Transformer for Quadrupedal Locomotion</h3>
+                    <div class="publication-meta">NeurIPS 2025 • Under Review</div>
+                    <p>Submitted full-length paper combining diffusion transformers with reinforcement learning for advanced quadrupedal robot locomotion control.</p>
+                </div>
+                
+                <div class="publication-card fade-in">
+                    <h3 class="publication-title">Vision-Guided Predictive Action Imitation Learning</h3>
+                    <div class="publication-meta">Engineering Applications of AI • Under Review</div>
+                    <p>Journal article on discrete latent encoding for multitasking robots, advancing the field of vision-guided robotic manipulation.</p>
+                </div>
+                <div class="publication-card fade-in">
+                    <h3 class="publication-title">MambaVLA: A Scalable and Efficient Vision-Language-Action Model with State Space Architecture</h3>
+                    <div class="publication-meta">IEEE CCNC • Under Review</div>
+                    <p>A novel VLA framework leveraging state space architecture to achieve SOTA in robotic manipulation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Achievements & Recognition</h2>
+                <p>Milestones in my academic and research journey</p>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card fade-in">
+                    <div class="achievement-text">
+                        <h3>Best Thesis Award — KNU-EERC</h3>
+                        <p>Received the prestigious best thesis award at the KNU-EERC event in July 2025, recognizing excellence in research methodology and innovation in robotics and AI.</p>
+                    </div>
+                    <div class="achievement-images">
+                        <img src="assets/images/pic9.jpeg" alt="Best Thesis Award">
+                        <img src="assets/images/pic10.png" alt="Award Ceremony">
+                    </div>
+                </div>
+                
+                <div class="achievement-card fade-in">
+                    <div class="achievement-text">
+                        <h3>NodyCon Oral Presentation — DLDMP Research</h3>
+                        <p>Delivered an acclaimed oral presentation on Discrete Latent Diffusion Motion Planning at NodyCon in New York, USA, showcasing cutting-edge research to an international audience.</p>
+                    </div>
+                    <div class="achievement-images">
+                        <img src="assets/images/pic11.png" alt="NodyCon Presentation">
+                        <img src="assets/images/pic12.png" alt="Conference Experience">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Resume</h2>
+                <p>Download my complete professional profile</p>
+            </div>
+            <div class="resume-content fade-in">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-light);">Click on the preview images to view or download my complete resume</p>
+                <a href="assets/images/Resume.pdf" target="_blank">
+                    <img src="assets/images/1.png" alt="Resume Page 1">
+                    <img src="assets/images/2.png" alt="Resume Page 2">
+                </a>
+                <div style="margin-top: 2rem;">
+                    <a href="assets/images/Resume.pdf" download class="btn btn-primary" style="background: var(--accent-gradient);">
+                        <i class="fas fa-download"></i>
+                        Download Resume PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Contact Me</h2>
+                <p>Let’s connect and create something amazing together</p>
+            </div>
+            <div class="contact-content">
+                <!-- Contact Info -->
+                <div class="contact-info slide-in-left">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>Email</strong>
+                            <p>manishalingala2002@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <strong>GitHub</strong>
+                            <a href="https://github.com/manishalingala" target="_blank">github.com/manishalingala</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <strong>LinkedIn</strong>
+                            <a href="https://www.linkedin.com/in/lingala-manisha-94a67720a/" target="_blank">linkedin.com</a>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/manishalingala" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/lingala-manisha-94a67720a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:manishalingala2002@gmail.com"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Contact Visual -->
+                <div class="contact-visual slide-in-right" style="display: flex; align-items: center; justify-content: center;">
+                    <div style="background: var(--primary-gradient); width: 300px; height: 300px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; box-shadow: var(--shadow-lg);">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Lingala Manisha. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+ <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                if (this.classList.contains('video-btn')) {
-                    return; // Don't apply smooth scrolling to video buttons
-                }
-                
-                e.preventDefault();
-                
-                navLinks.classList.remove('active');
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Video Functionality
-        const videoOverlay = document.querySelector('.video-overlay');
-        const videoElement = document.querySelector('.video-overlay video');
-        const closeVideo = document.querySelector('.close-video');
-        const videoButtons = document.querySelectorAll('.video-btn');
-        const projectImages = document.querySelectorAll('.project-image');
-
-        // Function to play video
-        function playVideo(videoSrc) {
-            videoElement.src = videoSrc;
-            videoOverlay.style.display = 'flex';
-            videoElement.load();
-            videoElement.play();
-        }
-
-        // Add click event to video buttons
-        videoButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const videoSrc = this.getAttribute('data-video');
-                playVideo(videoSrc);
-            });
-        });
-
-        // Add click event to project images
-        projectImages.forEach(image => {
-            image.addEventListener('click', function() {
-                const videoSrc = this.getAttribute('data-video');
-                playVideo(videoSrc);
-            });
-        });
-
-        // Close video overlay
-        closeVideo.addEventListener('click', () => {
-            videoOverlay.style.display = 'none';
-            videoElement.pause();
-        });
-
-        // Also close video when clicking outside the video
-        videoOverlay.addEventListener('click', (e) => {
-            if (e.target === videoOverlay) {
-                videoOverlay.style.display = 'none';
-                videoElement.pause();
+    // Scroll animations
+    const fadeElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
-    </script>
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // Project video overlay (supports mp4 and YouTube)
+    const projectCards = document.querySelectorAll('.project-card');
+    const videoOverlay = document.createElement('div');
+    videoOverlay.className = 'video-overlay';
+    videoOverlay.innerHTML = `
+        <div class="video-container">
+            <span class="close-video">&times;</span>
+            <div class="video-wrapper"></div>
+        </div>
+    `;
+    document.body.appendChild(videoOverlay);
+
+    const videoWrapper = videoOverlay.querySelector('.video-wrapper');
+    const closeVideo = videoOverlay.querySelector('.close-video');
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const videoSrc = card.getAttribute('data-video');
+            if (videoSrc) {
+                // Clear previous content
+                videoWrapper.innerHTML = '';
+
+                if (videoSrc.includes("youtube.com") || videoSrc.includes("youtu.be")) {
+                    // Load YouTube iframe
+                    videoWrapper.innerHTML = `
+                        <iframe width="100%" height="400" 
+                            src="${videoSrc}" 
+                            title="YouTube video player" 
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    `;
+                } else {
+                    // Load MP4 video
+                    videoWrapper.innerHTML = `
+                        <video controls autoplay>
+                            <source src="${videoSrc}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    `;
+                }
+
+                videoOverlay.style.display = 'flex';
+            }
+        });
+    });
+
+    closeVideo.addEventListener('click', () => {
+        videoOverlay.style.display = 'none';
+        videoWrapper.innerHTML = ''; // Stop video/iframe when closed
+    });
+</script>
+
+
 </body>
 </html>
