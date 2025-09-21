@@ -1408,6 +1408,96 @@
 /* ---------- Full, detailed project data (9 projects) ---------- */
 const projectsData = [
   {
+  title: "QROOT: Integrated Diffusion Transformer for Quadrupedal Locomotion",
+
+  abstract: `
+    QROOT is a Vision-Language-Action (VLA) framework designed to enable robots to efficiently 
+    interpret natural language commands and convert them into precise locomotion behaviors. 
+    By leveraging vision, language understanding, and reinforcement learning, QROOT can execute 
+    navigation and search tasks in real-world environments.
+  `,
+
+  introHtml: `
+    <h4>Architecture Overview</h4>
+    <p>
+      QROOT combines diffusion transformers with reinforcement learning for advanced quadrupedal 
+      robot locomotion control. The system processes multiple input modalities:
+    </p>
+    
+    <ul>
+      <li><strong>Vision:</strong> The robot perceives the environment through camera frames</li>
+      <li><strong>Language:</strong> Commands are tokenized (e.g., "go to blue cube")</li>
+      <li><strong>State:</strong> Current locomotion state (velocities vx, vy, vz) is included</li>
+    </ul>
+
+    <h4>Processing Pipeline</h4>
+    <ol>
+      <li><strong>Vision-Language State Encoder:</strong> Fuses visual observations, state information, and language embeddings into a unified representation</li>
+      <li><strong>DiT Block (Diffusion Transformer):</strong> Processes encoded inputs using iterative refinement. Action tokens are progressively denoised for robust motion planning</li>
+      <li><strong>Action Decoder:</strong> Converts refined action tokens into executable motor commands</li>
+      <li><strong>Reinforcement Learning Policy (PPO):</strong> Ensures generated actions are safe, efficient, and adaptable in dynamic environments</li>
+    </ol>
+
+    <img src="assets/images/QROOT.jpeg" alt="QROOT Architecture" style="width:100%; border-radius:8px; margin: 1rem 0;">
+
+    <h4>Key Features</h4>
+    <ul>
+      <li><strong>Natural Command Following:</strong> Interprets language directly into motion</li>
+      <li><strong>Efficient Locomotion:</strong> Minimizes wasted movement using diffusion-based planning</li>
+      <li><strong>Safe Navigation:</strong> Obstacle-aware, robust in narrow or cluttered environments</li>
+      <li><strong>Generalization:</strong> Transferable across different environments and landmarks</li>
+    </ul>
+  `,
+
+  resultsHtml: `
+    <h4>Demonstration Results</h4>
+    <p>
+      The QROOT framework was validated on real-world locomotion tasks. Below are demonstrations 
+      of the system following natural language commands in complex environments:
+    </p>
+
+    <div style="margin: 1.5rem 0;">
+      <h5>Command 1: "Go left side to the tunnel"</h5>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; margin: 1rem 0;">
+        <iframe src="https://www.youtube.com/embed/7i3MEXENwQg" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;" 
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p style="color: #666; font-style: italic;">QROOT aligns to tunnel and approaches via left margin.</p>
+    </div>
+
+    <div style="margin: 1.5rem 0;">
+      <h5>Command 2: "Go through tunnel"</h5>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; margin: 1rem 0;">
+        <iframe src="https://www.youtube.com/embed/38P3yWFFW2U" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;" 
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p style="color: #666; font-style: italic;">QROOT lowers speed, adjusts posture, and traverses narrow passage.</p>
+    </div>
+
+    <div style="margin: 1.5rem 0;">
+      <h5>Command 3: "Find sofa"</h5>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; margin: 1rem 0;">
+        <iframe src="https://www.youtube.com/embed/6dyglqckLCg" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;" 
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p style="color: #666; font-style: italic;">QROOT activates object search, detects sofa, navigates and stops at safe proximity.</p>
+    </div>
+
+    <h4>Results</h4>
+    <ul>
+      <li>Successfully integrated natural language processing with quadrupedal locomotion</li>
+      <li>Demonstrated robust navigation through challenging environments</li>
+      <li>Achieved safe and efficient object search and approach behaviors</li>
+      <li>Validated diffusion-based motion planning in real-world scenarios</li>
+    </ul>
+  `,
+
+  video:"https://www.youtube.com/embed/v=oJoD8eFbG54" // Since we have multiple videos in resultsHtml, we don't need a single video here
+},
+  {
     title: "Discrete Latent Diffusion Motion Planning",
     abstract: `
       Presented at NODYCON 2025, this project introduces a discrete latent diffusion 
